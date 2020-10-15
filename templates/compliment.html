@@ -4,6 +4,29 @@
   <title>A Compliment</title>
 </head>
 <body>
-    Hi {{ person }}! I think you're {{ compliment }}!
+    Hi {{ person }}!
+    {% if last_compliment == '' %}
+    You're {{other_compliments}}.
+    
+
+    {% elif other_compliments|length == 1 %}
+    You're {{other_compliments[0]}} and {{last_compliment}}.
+
+    {% else %}
+    You're
+      {% for compliment in other_compliments %}
+        {{compliment}}, 
+      {% endfor %}
+    and {{last_compliment}}.
+
+    {% endif %}
+    
+    <form action="/game">
+      Want to play madlibs?
+      <input type="radio" name="game" value="yes">
+      <label>Yes</label>
+      <input type="radio" name="game" value="no">
+      <label>No</label>
+    </form>
 </body>
 </html>
